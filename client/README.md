@@ -1,40 +1,34 @@
-# Full Stack Vite + Express App
+# 🚀 Token Analysis Frontend
 
-## 📁 Project Structure
+A fast and responsive React-based frontend for token analysis, built using Vite and styled with Tailwind CSS.
 
-- `client/`: Frontend built with React and Vite.
-- `server/`: Backend built with Express.js.
-- Common components like Navbar and Footer are included on all pages **except** login and signup.
+## 📋 Table of Contents
 
-## 🧱 Pages
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [License](#license)
 
-- Home
-- Dashboard
-- Trade
-- Market
-- Profile
-- Login / Signup (without layout)
+## ✨ Features
 
----
+- Clean and modern UI
+- Responsive design across all devices
+- React Router-based page navigation
+- Common layout components (e.g., Navbar, Footer)
+- Pages: Home, Dashboard, Market, Trade, Profile, Login, Signup
 
-## ⚙️ Installation
+## 🛠️ Tech Stack
 
-### 🖥️ Frontend
+- **Frontend Framework**: React
+- **Bundler**: Vite
+- **Styling**: Tailwind CSS
+- **Routing**: React Router DOM
 
-```bash
-cd client
-npm install
-npm run dev
+## 🚀 Getting Started
 
+### Prerequisites
 
+- Node.js (v14 or later)
 
-
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-// Layout
-import DefaultLayout from './layouts/DefaultLayout';
-
-// Pages
-import Home from './pages/Home';
-
+### Installation
