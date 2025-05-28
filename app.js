@@ -21,7 +21,7 @@ app.use('/api/token', tokenRoutes);
 app.use(errorHandler);
 
 // Start the server after connecting to the database
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 connectDB()
   .then(() => {
