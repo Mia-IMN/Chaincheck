@@ -55,16 +55,17 @@ const Footer = () => {
 
         {/* Social Icons */}
         <div className="flex flex-col justify-end">
-          <div className="icons flex justify-between gap-4">
+          <div className="icons flex justify-center sm:justify-between gap-6 sm:gap-3 md:gap-4">         
             <Send size={20} className="mb-2 cursor-pointer hover:scale-110 transition-transform" />
             <Twitter size={20} className="mb-2 cursor-pointer hover:scale-110 transition-transform" />
             <FaDiscord size={20} className="cursor-pointer hover:scale-110 transition-transform" />
           </div>
         </div>
-      </div>
+    </div>
+
 
       {/* Divider and Bottom Text */}
-      <div className="mt-10 border-t border-gray-700 pt-6 text-right text-sm">
+      <div className="mt-10 border-t border-gray-700 pt-6 text-sm text-center lg:text-right">
         © 2025 ChainCheck. All rights reserved. <br />
         Built with trust for the Sui Build-a-thon.
       </div>
