@@ -10,5 +10,5 @@ const analyzeToken = async (tokenAddress) => {
     throw new Error('Token analysis failed');
   }
 };
-
+ 
 module.exports = { analyzeToken };
