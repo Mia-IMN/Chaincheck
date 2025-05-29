@@ -1,6 +1,8 @@
 import { Wallet, Twitter, Send } from 'lucide-react';
 import { FaDiscord } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.svg';
+
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -20,11 +22,17 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
         {/* Logo & Wallet */}
         <div className="flex flex-col items-start gap-24">
-          <img
-            src="https://otiktpyazqotihijbwhm.supabase.co/storage/v1/object/public/images/eef2a7c5-a7c3-4d2e-ad01-efb4af29abe9-image.png"
-            alt="Logo"
-            className="w-50 h-auto"
-          />
+          <div className="flex items-center gap-2 justify-center">
+              <img
+                src={logo}
+                alt="chain check logo"
+                className="h-10 w-10"
+                draggable="false"
+              />
+              <p className="font-bold text-lg self mt-4">
+                Chain<span className="text-[#0FAE96] font-bold">check</span>
+              </p>
+          </div>
           <button className="flex items-center gap-2 text-black font-semibold bg-gradient-to-r from-[#A9DADC] to-[#70C494] py-2 px-4 rounded-3xl">
             Connect Wallet <Wallet size={18} />
           </button>
