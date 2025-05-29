@@ -10,6 +10,7 @@ const HomeHero = () => {
 
   return (
     <div className="hero-section text-white flex flex-col justify-center items-center text-center px-4 h-[95vh]">
+
       <h1 className="text-3xl md:text-4xl font-bold mb-8">
           Your Sui Scam Radar Know what's real, spot what's fake!
       </h1>
