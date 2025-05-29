@@ -1,106 +1,159 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { LayoutDashboard, Wallet, CircleDollarSign, User } from 'lucide-react';
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import {
+  Globe,
+  Menu,
+  X,
+  Home,
+  User,
+  BarChart2,
+  BookOpen,
+  Wallet,
+} from "lucide-react";
 
 const Navbar = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const dropdownRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
-  const toggleDropdown = () => setShowDropdown(prev => !prev);
-
+  // Scroll handler to toggle navbar glass effect
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowDropdown(false);
-      }
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close dropdown when a link is clicked
-  const handleLinkClick = () => setShowDropdown(false);
+  // Click outside to close menu
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen]);
 
   return (
     <>
-      {/* Top Navbar */}
-      <nav className="main-clr-bg text-white p-4 flex justify-between items-center">
+      <nav
+        className={`w-full px-6 py-4 flex items-center justify-between text-white fixed top-0 z-50 border-b transition-all duration-300 ${
+          scrolled
+            ? "bg-white/10 backdrop-blur-md border-white/20 shadow-md"
+            : "bg-transparent border-transparent shadow-none"
+        }`}
+      >
         {/* Logo */}
-        <div className="logo w-[160px] sm:w-[220px] md:w-[309px]">
+        <div className="flex items-center gap-2">
           <img
             src="https://otiktpyazqotihijbwhm.supabase.co/storage/v1/object/public/images/eef2a7c5-a7c3-4d2e-ad01-efb4af29abe9-image.png"
-            alt="Logo"
-            className="w-full h-auto"
+            alt="CryptoCap Logo"
+            className="h-8"
           />
         </div>
 
-        {/* Desktop Nav Links */}
-        <ul className="hidden lg:flex list-none gap-6 items-center">
-          <li>
-            <Link to="/dashboard" className="inline-flex items-center gap-1">
-              Dashboard <LayoutDashboard size={18} />
-            </Link>
+        {/* Desktop Links */}
+        <ul className="hidden md:flex gap-8 text-sm items-center">
+          <li className="text-[#0FAE96] font-semibold cursor-pointer flex items-center gap-1">
+            <Home size={16} />
+            <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/trade" className="inline-flex items-center gap-1">
-              Trade <Wallet size={18} />
-            </Link>
+          <li className="cursor-pointer flex items-center gap-1">
+            <User size={16} />
+            <Link to="/profile">Profile</Link>
           </li>
-          <li>
-            <Link to="/market" className="inline-flex items-center gap-1">
-              Market <CircleDollarSign size={18} />
-            </Link>
+          <li className="cursor-pointer flex items-center gap-1">
+            <BarChart2 size={16} />
+            <Link to="/market">Market</Link>
           </li>
-          <li>
-            <Link to="/profile" className="inline-flex items-center gap-1">
-              Profile <User size={18} />
-            </Link>
+          <li className="cursor-pointer flex items-center gap-1">
+            <BookOpen size={16} />
+            <Link to="/learn">Learn</Link>
           </li>
         </ul>
 
-        {/* Desktop Buttons */}
-        <div className="hidden lg:flex gap-3">
-          <Link to="/login" className="btn-alt text-sm px-4 py-1">Login</Link>
-          <Link to="/signup" className="btn text-sm px-4 py-1">Sign Up</Link>
+        {/* Right side items */}
+        <div className="hidden md:flex items-center gap-4">
+          <Globe size={18} />
+          <span>EN</span>
+          <button className="bg-[#0FAE96] text-white px-5 py-2 rounded-full text-sm flex items-center gap-2 hover:bg-[#0da286] transition">
+            <Wallet size={16} />
+            Connect Wallet
+          </button>
         </div>
 
-        {/* Mobile/Tablet User Icon + Dropdown */}
-        <div className="lg:hidden relative" ref={dropdownRef}>
-          <button
-            onClick={toggleDropdown}
-            aria-label="Account Menu"
-            aria-expanded={showDropdown}
-          >
-            <User size={24} />
-          </button>
-          {showDropdown && (
-            <div className="absolute right-0 mt-2 bg-[#060418] text-white shadow-md rounded-2xl w-32 z-50 text-sm p-2 border-2 border-white">
-              <Link
-                to="/login"
-                onClick={handleLinkClick}
-                className="block px-4 py-2 bg-[#060418] text-white"
-              >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                onClick={handleLinkClick}
-                className="block px-4 py-2 bg-[#060418] text-white"
-              >
-                Sign Up
-              </Link>
-            </div>
-          )}
-        </div>
+        {/* Hamburger button - show on md and below */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden flex items-center text-white focus:outline-none z-60"
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </nav>
 
-      {/* Bottom Navbar for Mobile & Tablet */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-[#1F2937] text-white flex justify-around items-center py-3 px-6 w-11/12 sm:w-2/3 md:w-1/2 rounded-full shadow-lg lg:hidden z-50 border-white border-2">
-        <Link to="/dashboard"><LayoutDashboard size={22} /></Link>
-        <Link to="/trade"><Wallet size={22} /></Link>
-        <Link to="/market"><CircleDollarSign size={22} /></Link>
-        {/* Removed Profile icon from here */}
+      {/* Slide-in Menu */}
+      <div
+        className={`fixed top-0 right-0 h-full w-64 bg-white/10 backdrop-blur-md border-l border-white/20 shadow-lg transform transition-transform duration-300 ease-in-out z-40
+        ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
+        ref={menuRef}
+      >
+        <nav className="flex flex-col mt-20 px-6 text-white gap-6 font-semibold text-lg">
+          <Link
+            to="/"
+            className="hover:text-[#0FAE96] flex items-center gap-2"
+            onClick={() => setMenuOpen(false)}
+          >
+            <Home size={20} />
+            Home
+          </Link>
+          <Link
+            to="/profile"
+            className="hover:text-[#0FAE96] flex items-center gap-2"
+            onClick={() => setMenuOpen(false)}
+          >
+            <User size={20} />
+            Profile
+          </Link>
+          <Link
+            to="/market"
+            className="hover:text-[#0FAE96] flex items-center gap-2"
+            onClick={() => setMenuOpen(false)}
+          >
+            <BarChart2 size={20} />
+            Market
+          </Link>
+          <Link
+            to="/learn"
+            className="hover:text-[#0FAE96] flex items-center gap-2"
+            onClick={() => setMenuOpen(false)}
+          >
+            <BookOpen size={20} />
+            Learn
+          </Link>
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="mt-6 bg-[#0FAE96] text-white px-5 py-2 rounded-full text-base flex items-center gap-2 hover:bg-[#0da286] transition"
+          >
+            <Wallet size={18} />
+            Connect Wallet
+          </button>
+        </nav>
       </div>
+
+      {/* Glassmorphic blur overlay instead of black */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 bg-white/10 backdrop-blur-md z-30"
+          aria-hidden="true"
+        ></div>
+      )}
     </>
   );
 };

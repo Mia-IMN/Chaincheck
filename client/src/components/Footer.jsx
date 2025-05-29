@@ -3,7 +3,7 @@ import { FaDiscord } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#060418] text-white px-6 py-12">
+    <footer className="bg-[#11011E] text-white px-8 py-28">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
         {/* Logo & Wallet */}
         <div className="flex flex-col items-start gap-24">
@@ -30,15 +30,15 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Profile Links */}
+        {/* Updated Profile Links */}
         <div>
           <h4 className="font-bold mb-3 text-lg">Profile</h4>
           <ul className="space-y-6 text-sm">
-            <li className="hover:underline cursor-pointer">Sign up</li>
-            <li className="hover:underline cursor-pointer">Log in</li>
-            <li className="hover:underline cursor-pointer">Dashboard</li>
-            <li className="hover:underline cursor-pointer">Report a Scam</li>
+            <li className="hover:underline cursor-pointer">Profile manager</li>
+            <li className="hover:underline cursor-pointer">Market</li>
+            <li className="hover:underline cursor-pointer">Trade</li>
             <li className="hover:underline cursor-pointer">Support</li>
+            <li className="hover:underline cursor-pointer">Report a Scam</li>
           </ul>
         </div>
 
@@ -55,17 +55,16 @@ const Footer = () => {
 
         {/* Social Icons */}
         <div className="flex flex-col justify-end">
-          <div className="icons flex justify-center sm:justify-between gap-6 sm:gap-3 md:gap-4">         
+          <div className="icons flex justify-center sm:justify-between gap-6 sm:gap-3 md:gap-4">
             <Send size={20} className="mb-2 cursor-pointer hover:scale-110 transition-transform" />
             <Twitter size={20} className="mb-2 cursor-pointer hover:scale-110 transition-transform" />
             <FaDiscord size={20} className="cursor-pointer hover:scale-110 transition-transform" />
           </div>
         </div>
-    </div>
-
+      </div>
 
       {/* Divider and Bottom Text */}
-      <div className="mt-10 border-t border-gray-700 pt-6 text-sm text-center lg:text-right">
+      <div className="mt-10 border-t border-white/20 pt-6 text-sm text-center lg:text-right">
         © 2025 ChainCheck. All rights reserved. <br />
         Built with trust for the Sui Build-a-thon.
       </div>
