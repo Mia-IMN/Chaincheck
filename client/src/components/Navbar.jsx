@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import logo from '../assets/logo.svg';
+
 import {
   Globe,
   Menu,
@@ -9,6 +11,7 @@ import {
   BarChart2,
   BookOpen,
   Wallet,
+  Moon
 } from "lucide-react";
 
 const Navbar = () => {
@@ -50,12 +53,16 @@ const Navbar = () => {
         }`}
       >
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <img
-            src="https://otiktpyazqotihijbwhm.supabase.co/storage/v1/object/public/images/eef2a7c5-a7c3-4d2e-ad01-efb4af29abe9-image.png"
-            alt="CryptoCap Logo"
-            className="h-8"
-          />
+         <div className="flex items-center gap-2 justify-center">
+            <img
+              src={logo}
+              alt="chain check logo"
+              className="h-10 w-10"
+              draggable="false"
+            />
+            <p className="font-bold text-lg self mt-4">
+              Chain<span className="text-[#0FAE96] font-bold">check</span>
+            </p>
         </div>
 
         {/* Desktop Links */}
@@ -80,7 +87,7 @@ const Navbar = () => {
 
         {/* Right side items */}
         <div className="hidden md:flex items-center gap-4">
-          <Globe size={18} />
+          <Moon size={18} />
           <span>EN</span>
           <button className="bg-[#0FAE96] text-white px-5 py-2 rounded-full text-sm flex items-center gap-2 hover:bg-[#0da286] transition">
             <Wallet size={16} />
@@ -107,10 +114,9 @@ const Navbar = () => {
         <nav className="flex flex-col mt-20 px-6 text-white gap-6 font-semibold text-lg">
           <Link
             to="/"
-            className="hover:text-[#0FAE96] flex items-center gap-2"
+            className="hover:text-[#0FAE96] flex items-center gap-2 mt-3"
             onClick={() => setMenuOpen(false)}
           >
-            <Home size={20} />
             Home
           </Link>
           <Link
@@ -118,7 +124,6 @@ const Navbar = () => {
             className="hover:text-[#0FAE96] flex items-center gap-2"
             onClick={() => setMenuOpen(false)}
           >
-            <User size={20} />
             Profile
           </Link>
           <Link
@@ -126,7 +131,6 @@ const Navbar = () => {
             className="hover:text-[#0FAE96] flex items-center gap-2"
             onClick={() => setMenuOpen(false)}
           >
-            <BarChart2 size={20} />
             Market
           </Link>
           <Link
@@ -134,7 +138,6 @@ const Navbar = () => {
             className="hover:text-[#0FAE96] flex items-center gap-2"
             onClick={() => setMenuOpen(false)}
           >
-            <BookOpen size={20} />
             Learn
           </Link>
           <button

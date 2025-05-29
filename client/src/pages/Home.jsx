@@ -11,7 +11,9 @@ const Home = () => {
       <section>
         <HomeHero />
         <Features />
-        <HowItWorks />
+        <div id='how-it-works'>
+          <HowItWorks />
+        </div>
         <div id='token-analysis'>
           <TokenInput />
         </div>
