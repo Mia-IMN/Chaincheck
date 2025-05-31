@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Ed25519Keypair } from '@mysten/sui/keypairs/ed25519';
 import { SuiClient } from '@mysten/sui/client';
+import "@mysten/dapp-kit/dist/index.css"
+import { SuiClientProvider, WalletProvider } from '@mysten/dapp-kit';
+import { createNetworkConfig } from '@mysten/dapp-kit';
+import { useWallets, useCurrentWallet } from '@mysten/dapp-kit';
+import { ConnectButton, useWalletKit } from '@mysten/wallet-kit';
 import { 
   generateNonce, 
   generateRandomness, 
@@ -18,6 +23,25 @@ const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || 'https://chaincheck.o
 const PROVER_URL = 'https://prover-dev.mystenlabs.com/v1'; // Mysten Labs devnet prover
 const SUI_NETWORK = 'devnet'; // or 'testnet', 'mainnet'
 const FULLNODE_URL = `https://fullnode.${SUI_NETWORK}.sui.io`;
+
+interface SuiWallet extends WalletError {
+  accounts: Array<{
+    address: string;
+    publicKey: string | null;
+    label?: string;
+    chainId?: string;
+  }>;
+  chains: string[];
+  features: Record<string, boolean>;
+  icon: string;
+  name: string;
+  version: string;
+}
+
+interface WalletError extends Error {
+  code?: number;
+  details?: string;
+}
 
 // Interface for JWT payload
 interface JwtPayload {
@@ -40,6 +64,7 @@ export const useWalletConnection = () => {
   const [randomness, setRandomness] = useState<string>('');
 
   const suiClient = new SuiClient({ url: FULLNODE_URL });
+  const walletKit = useWalletKit();
 
   // Generate ephemeral keypair and setup for zkLogin
   const setupEphemeralKeyPair = async () => {
@@ -217,51 +242,41 @@ export const useWalletConnection = () => {
     }
   };
 
-  const connectWithSuiWallet = async () => {
+
+const connectWithSuiWallet = async () => {
+  console.log("Connecting with sui blockchain wallet")
     setIsConnecting(true);
     setError(null);
     
     try {
-      // Check if Sui wallet is available
-      if (!window.suiWallet) {
-        throw new Error('Sui wallet not detected. Please install a Sui wallet extension.');
+      // Connect to Sui wallet specifically
+      await walletKit.connect('Sui Wallet');
+      console.log("Got here")
+      
+      if (walletKit.currentAccount) {
+        const walletConnection: WalletConnection = {
+          address: walletKit.currentAccount.address,
+          type: 'sui-wallet',
+          name: walletKit.currentAccount.label || 'Sui Wallet'
+        };
+        
+        setWallet(walletConnection);
+        localStorage.setItem('wallet-connection', JSON.stringify(walletConnection));
       }
-      
-      // Request connection to Sui wallet
-      const response = await window.suiWallet.requestPermissions();
-      
-      if (!response.granted) {
-        throw new Error('Sui wallet connection denied.');
-      }
-
-      // Get accounts
-      const accounts = await window.suiWallet.getAccounts();
-      
-      if (accounts.length === 0) {
-        throw new Error('No accounts found in Sui wallet.');
-      }
-
-      const account = accounts[0];
-      
-      const walletConnection: WalletConnection = {
-        address: account.address,
-        type: 'sui-wallet' as const,
-        name: 'Sui Wallet'
-      };
-      
-      setWallet(walletConnection);
-      
-      // Store in localStorage for persistence
-      localStorage.setItem('wallet-connection', JSON.stringify(walletConnection));
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to connect Sui wallet');
+      const error = err as WalletError;
+      console.error('Wallet connection error:', error);
+      setError(error.message || 'Failed to connect Sui wallet');
     } finally {
       setIsConnecting(false);
     }
   };
 
-  const disconnect = () => {
+  const disconnect = async () => {
+
+
     setWallet(null);
+    walletKit.disconnect();
     setError(null);
     setEphemeralKeyPair(null);
     setMaxEpoch(0);
@@ -320,6 +335,17 @@ export const useWalletConnection = () => {
       throw err;
     }
   };
+
+  useEffect(() => {
+    const savedWallet = localStorage.getItem('wallet-connection');
+    if (savedWallet) {
+      try {
+        setWallet(JSON.parse(savedWallet));
+      } catch (err) {
+        localStorage.removeItem('wallet-connection');
+      }
+    }
+  }, []);
 
   // Check for OAuth callback on component mount
   useEffect(() => {

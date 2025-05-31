@@ -10,13 +10,35 @@ import { useSuiSystemData } from './hooks/useSuiSystemData';
 // Components
 import { Navigation } from './components/layout/Navigation';
 import { Footer } from './components/layout/Footer';
+import { WalletProvider } from '@mysten/dapp-kit';
+
+import { type NetworkConfig } from '@mysten/dapp-kit';
+
 import { WalletModal } from './components/modals/WalletModal';
 import { AnalysisModal } from './components/modals/AnalysisModal';
+import { SuiClientProvider } from '@mysten/dapp-kit';
+import { getFullnodeUrl } from '@mysten/sui/dist/cjs/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 
 // Pages
 import { HomePage } from './pages/HomePage';
 import { PortfolioPage } from './pages/PortfolioPage';
 import { LearnPage } from './pages/LearnPage';
+import { WalletKitProvider } from '@mysten/wallet-kit';
+
+
+type NetworkConfigs = {
+  testnet: NetworkConfig;
+};
+
+const networkConfig: NetworkConfigs = {
+  testnet: {
+    url: 'https://fullnode.testnet.sui.io'
+  }
+};
+
+const queryClient = new QueryClient()
 
 const ChainCheckApp: React.FC = () => {
   // Theme and navigation state
@@ -133,7 +155,18 @@ const ChainCheckApp: React.FC = () => {
     setSelectedTokenForAnalysis(token);
   };
 
+  interface WalletConnection {
+  address: string;
+  type: 'sui-wallet' | 'zk-google';
+  name: string;
+  label?: string;
+}
+
   return (
+    <QueryClientProvider client={queryClient}>
+    <SuiClientProvider networks={networkConfig} defaultNetwork={'testnet'}>
+      <WalletKitProvider>
+
     <div className={`${isDark ? 'dark bg-slate-900' : 'bg-white'} transition-colors duration-300 min-h-screen`}>
       {/* Navigation */}
       <Navigation
@@ -198,6 +231,9 @@ const ChainCheckApp: React.FC = () => {
         isDark={isDark}
       />
     </div>
+    </WalletKitProvider>
+    </SuiClientProvider>
+    </QueryClientProvider>
   );
 };
 

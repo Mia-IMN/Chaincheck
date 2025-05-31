@@ -1,4 +1,5 @@
 "use strict";
+import { useWalletKit } from "@mysten/wallet-kit";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -107,7 +108,7 @@ const WalletModal = ({ isOpen, onClose, isDark, wallet, isConnecting, error, con
 
                 <button onClick={() => {
                   console.log("Connecting with Sui Wallet");
-                  connectWithSuiWallet();
+                  connectWithSuiWallet(useWalletKit);
                 }} disabled={isConnecting} className={`w-full flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 ${isDark
                 ? 'bg-white/5 border-white/10 hover:bg-white/10 text-white'
                 : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-900 hover:shadow-md'} ${isConnecting ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'}`}>

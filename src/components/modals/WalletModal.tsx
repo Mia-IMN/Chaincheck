@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, User, Wallet, Copy, ExternalLink, LogOut, AlertTriangle, RefreshCw } from 'lucide-react';
 import { WalletConnection } from '../../types';
+import { ConnectButton } from '@mysten/wallet-kit';
 
 interface WalletModalProps {
   isOpen: boolean;
@@ -89,7 +90,7 @@ export const WalletModal: React.FC<WalletModalProps> = ({
                     )}
                     <div>
                       <div className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                        {wallet.type === 'zk-google' ? 'Google (ZK Login)' : 'Sui Wallet'}
+                        {wallet.type === 'zk-google' ? 'Google (ZK Login)' : <ConnectButton/>}
                       </div>
                       {wallet.name && (
                         <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -184,16 +185,29 @@ export const WalletModal: React.FC<WalletModalProps> = ({
                       : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-900 hover:shadow-md'
                   } ${isConnecting ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'}`}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 flex items-center justify-center">
-                    <Wallet className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1 text-left">
-                    <div className="font-semibold">Sui Wallet</div>
-                    <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                      Connect with browser extension wallet
-                    </div>
-                  </div>
-                  {isConnecting && (
+                  <ConnectButton className={`w-full flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 ${
+  isDark 
+    ? 'bg-white/5 border-white/10 hover:bg-white/10 text-white' 
+    : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-900 hover:shadow-md'
+} ${isConnecting ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'}`}>
+  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 flex items-center justify-center">
+    <Wallet className="w-6 h-6 text-white" />
+  </div>
+  <div className="flex-1 text-left">
+    <div className="font-semibold">
+      Sui Wallet
+    </div>
+    <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+      Connect with browser extension wallet
+    </div>
+  </div>
+  {isConnecting && (
+    <div className="animate-spin">
+      <RefreshCw className="w-5 h-5" />
+    </div>
+  )}
+</ConnectButton>
+                                    {isConnecting && (
                     <div className="animate-spin">
                       <RefreshCw className="w-5 h-5" />
                     </div>

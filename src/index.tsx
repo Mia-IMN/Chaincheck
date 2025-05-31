@@ -3,13 +3,38 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { SuiClientProvider } from '@mysten/dapp-kit';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { getFullnodeUrl } from '@mysten/sui/dist/cjs/client';
+import { NetworkConfig } from '@mysten/dapp-kit';
+import { WalletKitProvider } from '@mysten/wallet-kit';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+type NetworkConfigs = {
+  testnet: NetworkConfig;
+};
+
+const networkConfig: NetworkConfigs = {
+  testnet: {
+    url: 'https://fullnode.testnet.sui.io'
+  }
+};
+
+const queryClient = new QueryClient()
+
+
 root.render(
   <React.StrictMode>
-    <App />
+        <QueryClientProvider client={queryClient}>
+    <SuiClientProvider networks={networkConfig} defaultNetwork={'testnet'}>
+      <WalletKitProvider>
+        <App />
+
+      </WalletKitProvider>
+    </SuiClientProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
