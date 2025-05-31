@@ -351,14 +351,14 @@ export const AnalysisModal: React.FC<AnalysisModalProps> = ({ token, onClose, is
                 >
                   Close
                 </button>
-                <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-blue-500/25 transform hover:scale-[1.02] transition-all duration-200">
+                <button className="px-6 py-3 bg-gradient-to-r from-[#2F5A8A] to-[#437AF3] text-white rounded-xl font-medium hover:shadow-lg hover:shadow-blue-500/25 transform hover:scale-[1.02] transition-all duration-200">
                   Export Report
                 </button>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div>  
     </div>
   );
 };

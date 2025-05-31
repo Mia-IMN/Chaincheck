@@ -29,7 +29,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ isDark }) => {
             ? 'bg-white/5 border-white/10' 
             : 'bg-white border-gray-200 shadow-xl'
         }`}>
-          <div className="w-24 h-24 mx-auto mb-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+          <div className="w-24 h-24 mx-auto mb-8 bg-gradient-to-r from-[#2F5A8A] to-[#437AF3] rounded-2xl flex items-center justify-center">
             <BarChart3 className="w-12 h-12 text-white" />
           </div>
           <h1 className={`text-4xl font-bold mb-6 ${

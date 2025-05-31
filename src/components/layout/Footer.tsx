@@ -1,4 +1,8 @@
 import React from 'react';
+import LightLogo from './light.svg';
+import DarkLogo from './dark.svg';
+
+
 
 interface FooterProps {
   isDark: boolean;
@@ -19,24 +23,16 @@ export const Footer: React.FC<FooterProps> = ({ isDark, lastUpdated }) => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                <div className={`w-6 h-6 rounded-lg ${
-                  isDark ? 'bg-white' : 'bg-white'
-                }`}></div>
-              </div>
-              <div>
-                <div className={`text-2xl font-bold ${
-                  isDark ? 'text-white' : 'text-gray-900'
-                }`}>
-                  ChainCheck
-                </div>
-                <div className={`text-sm ${
-                  isDark ? 'text-slate-400' : 'text-slate-500'
-                }`}>
-                  Professional Grade Intelligence
-                </div>
-              </div>
+            <div className="flex items-center mb-3">             
+              <div className="">                 
+                <img                     
+                  src={isDark ? DarkLogo : LightLogo}                     
+                  alt="Logo"                     
+                  className={`h-full object-contain transition-all duration-300 ${                       
+                    isDark ? 'w-[200px]' : 'w-[250px] mb-4'                     
+                  }`}                   
+                />              
+              </div>           
             </div>
             <p className={`mb-8 max-w-md leading-relaxed ${
               isDark ? 'text-slate-300' : 'text-slate-600'

@@ -83,7 +83,7 @@ export const LearnPage: React.FC<LearnPageProps> = ({ isDark }) => {
               key={category}
               className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 border ${
                 category === 'All' 
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white border-transparent'
+                  ? 'bg-gradient-to-r from-[#2F5A8A] to-[#437AF3] text-white border-transparent'
                   : isDark 
                     ? 'bg-white/5 text-slate-300 border-white/10 hover:bg-white/10' 
                     : 'bg-white text-slate-600 border-gray-200 hover:bg-gray-50'
@@ -167,7 +167,7 @@ export const LearnPage: React.FC<LearnPageProps> = ({ isDark }) => {
                   : 'bg-white border-gray-200 text-gray-900 placeholder-slate-500'
               } focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
-            <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-200">
+            <button className="bg-gradient-to-r from-[#2F5A8A] to-[#437AF3] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-200">
               Subscribe
             </button>
           </div>

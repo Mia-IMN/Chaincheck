@@ -116,7 +116,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               isDark ? 'text-white' : 'text-gray-900'
             }`}>
               <span className="block mb-2"> Advanced Token</span>
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#2F5A8A] to-[#437AF3] bg-clip-text text-transparent">
                 Analysis
               </span>
             </h1>
@@ -129,34 +129,59 @@ export const HomePage: React.FC<HomePageProps> = ({
             </p>
 
             {/* Professional search interface */}
-            <div className="relative max-w-3xl mx-auto mb-16">
-              <div className={`relative backdrop-blur-xl rounded-2xl border p-2 ${
-                isDark 
-                  ? 'bg-white/10 border-white/20' 
-                  : 'bg-white/80 border-gray-200/50'
-              } shadow-2xl`}>
-                <div className="flex items-center">
-                  <div className="flex-1 flex items-center">
-                    <Search className={`ml-6 mr-4 w-6 h-6 ${
-                      isDark ? 'text-slate-400' : 'text-slate-500'
-                    }`} />
-                    <input
-                      type="text"
-                      placeholder="Enter token address or symbol (e.g., 0x2::sui::SUI)"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className={`flex-1 py-4 bg-transparent ${
-                        isDark ? 'text-white placeholder-slate-400' : 'text-gray-900 placeholder-slate-500'
-                      } focus:outline-none text-lg font-medium`}
-                    />
-                  </div>
-                  <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
-                    <span>Analyze Token</span>
-                    <ArrowUpRight className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-            </div>
+              <div className="relative max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16 px-4 sm:px-6 md:px-0">
+  <div className={`relative backdrop-blur-xl rounded-xl sm:rounded-2xl border p-1.5 sm:p-2 ${
+    isDark
+      ? 'bg-white/10 border-white/20'
+      : 'bg-white/80 border-gray-200/50'
+  } shadow-xl sm:shadow-2xl`}>
+    
+    {/* Mobile Layout (stacked) */}
+    <div className="flex flex-col sm:hidden space-y-3 p-2">
+      <div className="flex items-center">
+        <Search className={`ml-3 mr-3 w-5 h-5 ${
+          isDark ? 'text-slate-400' : 'text-slate-500'
+        }`} />
+        <input
+          type="text"
+          placeholder="Token address or symbol"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className={`flex-1 py-3 bg-transparent ${
+            isDark ? 'text-white placeholder-slate-400' : 'text-gray-900 placeholder-slate-500'
+          } focus:outline-none text-base font-medium`}
+        />
+      </div>
+      <button className="bg-gradient-to-r from-[#2F5A8A] to-[#437AF3] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+        <span>Analyze Token</span>
+        <ArrowUpRight className="w-4 h-4 hidden sm:block" />
+      </button>
+    </div>
+
+    {/* Desktop/Tablet Layout (horizontal) */}
+    <div className="hidden sm:flex items-center">
+      <div className="flex-1 flex items-center">
+        <Search className={`ml-4 md:ml-6 mr-3 md:mr-4 w-5 md:w-6 h-5 md:h-6 ${
+          isDark ? 'text-slate-400' : 'text-slate-500'
+        }`} />
+        <input
+          type="text"
+          placeholder="Enter token address or symbol (e.g., 0x2::sui::SUI)"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className={`flex-1 py-3 md:py-4 bg-transparent ${
+            isDark ? 'text-white placeholder-slate-400' : 'text-gray-900 placeholder-slate-500'
+          } focus:outline-none text-base md:text-lg font-medium`}
+        />
+      </div>
+      <button className="bg-gradient-to-r from-[#2F5A8A] to-[#437AF3] text-white px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-lg md:rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300 flex items-center gap-2 text-sm md:text-base">
+        <span className="hidden sm:inline">Analyze Token</span>
+        <span className="sm:hidden">Analyze</span>
+        <ArrowUpRight className="w-4 md:w-5 h-4 md:h-5" />
+      </button>
+    </div>
+  </div>
+</div>
 
             {/* Quick stats with live data */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
@@ -522,17 +547,17 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* Professional Data Table */}
-      <section className={`py-24 px-6 ${
+            <section className={`py-12 sm:py-24 px-4 sm:px-6 ${
         isDark ? 'bg-slate-900' : 'bg-white'
       }`}>
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className={`text-3xl font-bold ${
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 sm:gap-0 mb-8 sm:mb-12">
+            <h2 className={`text-2xl sm:text-3xl font-bold ${
               isDark ? 'text-white' : 'text-gray-900'
             }`}>
               Market Overview
             </h2>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               {/* Search Bar */}
               <div className="relative">
                 <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 ${
@@ -546,7 +571,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     setMarketFilters(prev => ({ ...prev, search: e.target.value }));
                     setCurrentMarketPage(1);
                   }}
-                  className={`pl-10 pr-4 py-2 w-64 rounded-lg border text-sm ${
+                  className={`pl-10 pr-4 py-2 w-full sm:w-64 rounded-lg border text-sm ${
                     isDark 
                       ? 'bg-slate-800 border-slate-700 text-white placeholder-gray-400' 
                       : 'bg-white border-gray-200 text-gray-900 placeholder-gray-500'
@@ -554,48 +579,51 @@ export const HomePage: React.FC<HomePageProps> = ({
                 />
               </div>
               
-              {/* Category Filter */}
-              <select 
-                value={marketFilters.category}
-                onChange={(e) => {
-                  setMarketFilters(prev => ({ ...prev, category: e.target.value }));
-                  setCurrentMarketPage(1);
-                }}
-                className={`px-4 py-2 rounded-lg border text-sm ${
-                  isDark 
-                    ? 'bg-slate-800 border-slate-700 text-white' 
-                    : 'bg-white border-gray-200 text-gray-900'
-                }`}
-              >
-                <option value="All">All Tokens</option>
-                <option value="DeFi">DeFi</option>
-                <option value="Gaming">Gaming</option>
-                <option value="Infrastructure">Infrastructure</option>
-                <option value="NFT">NFT</option>
-              </select>
-              
-              {/* Sort Options */}
-              <select
-                value={`${marketFilters.sortBy}-${marketFilters.sortOrder}`}
-                onChange={(e) => {
-                  const [sortBy, sortOrder] = e.target.value.split('-') as [typeof marketFilters.sortBy, typeof marketFilters.sortOrder];
-                  setMarketFilters(prev => ({ ...prev, sortBy, sortOrder }));
-                }}
-                className={`px-4 py-2 rounded-lg border text-sm ${
-                  isDark 
-                    ? 'bg-slate-800 border-slate-700 text-white' 
-                    : 'bg-white border-gray-200 text-gray-900'
-                }`}
-              >
-                <option value="market_cap-desc">Market Cap ↓</option>
-                <option value="market_cap-asc">Market Cap ↑</option>
-                <option value="volume-desc">Volume ↓</option>
-                <option value="volume-asc">Volume ↑</option>
-                <option value="price_change_percentage_24h-desc">Change ↓</option>
-                <option value="price_change_percentage_24h-asc">Change ↑</option>
-                <option value="name-asc">Name A-Z</option>
-                <option value="name-desc">Name Z-A</option>
-              </select>
+              {/* Filter Row */}
+              <div className="flex gap-3 sm:gap-4">
+                {/* Category Filter */}
+                <select 
+                  value={marketFilters.category}
+                  onChange={(e) => {
+                    setMarketFilters(prev => ({ ...prev, category: e.target.value }));
+                    setCurrentMarketPage(1);
+                  }}
+                  className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 rounded-lg border text-sm ${
+                    isDark 
+                      ? 'bg-slate-800 border-slate-700 text-white' 
+                      : 'bg-white border-gray-200 text-gray-900'
+                  }`}
+                >
+                  <option value="All">All Tokens</option>
+                  <option value="DeFi">DeFi</option>
+                  <option value="Gaming">Gaming</option>
+                  <option value="Infrastructure">Infrastructure</option>
+                  <option value="NFT">NFT</option>
+                </select>
+                
+                {/* Sort Options */}
+                <select
+                  value={`${marketFilters.sortBy}-${marketFilters.sortOrder}`}
+                  onChange={(e) => {
+                    const [sortBy, sortOrder] = e.target.value.split('-') as [typeof marketFilters.sortBy, typeof marketFilters.sortOrder];
+                    setMarketFilters(prev => ({ ...prev, sortBy, sortOrder }));
+                  }}
+                  className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 rounded-lg border text-sm ${
+                    isDark 
+                      ? 'bg-slate-800 border-slate-700 text-white' 
+                      : 'bg-white border-gray-200 text-gray-900'
+                  }`}
+                >
+                  <option value="market_cap-desc">Market Cap ↓</option>
+                  <option value="market_cap-asc">Market Cap ↑</option>
+                  <option value="volume-desc">Volume ↓</option>
+                  <option value="volume-asc">Volume ↑</option>
+                  <option value="price_change_percentage_24h-desc">Change ↓</option>
+                  <option value="price_change_percentage_24h-asc">Change ↑</option>
+                  <option value="name-asc">Name A-Z</option>
+                  <option value="name-desc">Name Z-A</option>
+                </select>
+              </div>
             </div>
           </div>
           
@@ -605,8 +633,8 @@ export const HomePage: React.FC<HomePageProps> = ({
               : 'bg-white border-gray-200'
           }`}>
             {/* Table Header with Results Info */}
-            <div className={`px-6 py-4 border-b ${isDark ? 'border-white/10 bg-white/5' : 'border-gray-200 bg-gray-50'}`}>
-              <div className="flex items-center justify-between">
+            <div className={`px-4 sm:px-6 py-4 border-b ${isDark ? 'border-white/10 bg-white/5' : 'border-gray-200 bg-gray-50'}`}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
                 <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   {marketLoading ? (
                     'Loading tokens...'
@@ -617,19 +645,156 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <button
                   onClick={refetch}
                   disabled={marketLoading}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-2 px-3 py-1 rounded-lg text-sm font-medium transition-colors self-start sm:self-auto ${
                     isDark 
                       ? 'text-blue-400 hover:bg-blue-500/10' 
                       : 'text-blue-600 hover:bg-blue-50'
                   } ${marketLoading ? 'animate-spin' : ''}`}
                 >
                   <RefreshCw className="w-4 h-4" />
-                  <span className="hidden sm:inline">Refresh</span>
+                  <span>Refresh</span>
                 </button>
               </div>
             </div>
             
-            <div className="overflow-x-auto">
+            {/* Mobile Card View */}
+            <div className="block sm:hidden">
+              {marketLoading ? (
+                Array.from({ length: 5 }).map((_, i) => (
+                  <div key={i} className={`p-4 border-b animate-pulse ${isDark ? 'border-white/10' : 'border-gray-100'}`}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-12 h-12 rounded-xl ${isDark ? 'bg-slate-700' : 'bg-gray-200'}`}></div>
+                      <div className="flex-1">
+                        <div className={`h-4 w-24 rounded mb-2 ${isDark ? 'bg-slate-700' : 'bg-gray-200'}`}></div>
+                        <div className={`h-3 w-16 rounded ${isDark ? 'bg-slate-800' : 'bg-gray-100'}`}></div>
+                      </div>
+                      <div className={`h-8 w-20 rounded ${isDark ? 'bg-slate-700' : 'bg-gray-200'}`}></div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      {Array.from({ length: 4 }).map((_, j) => (
+                        <div key={j} className={`h-4 rounded ${isDark ? 'bg-slate-700' : 'bg-gray-200'}`}></div>
+                      ))}
+                    </div>
+                  </div>
+                ))
+              ) : displayTokens.length > 0 ? (
+                displayTokens.map((token, index) => (
+                  <div 
+                    key={token.id} 
+                    className={`p-4 border-b transition-colors duration-200 cursor-pointer ${
+                      isDark 
+                        ? 'border-white/10 hover:bg-white/5' 
+                        : 'border-gray-100 hover:bg-gray-50'
+                    }`}
+                    onClick={() => setSelectedToken(token)}
+                  >
+                    {/* Token Header */}
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        {token.image ? (
+                          <img src={token.image} alt={token.symbol} className="w-12 h-12 rounded-xl" />
+                        ) : (
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-sm
+                            ${token.symbol === 'SUI' ? 'bg-gradient-to-br from-blue-500 to-blue-600' :
+                              token.symbol === 'CETUS' ? 'bg-gradient-to-br from-purple-500 to-purple-600' :
+                              token.symbol === 'TURBOS' ? 'bg-gradient-to-br from-emerald-500 to-emerald-600' :
+                              token.symbol === 'DEEP' ? 'bg-gradient-to-br from-orange-500 to-orange-600' :
+                              'bg-gradient-to-br from-pink-500 to-pink-600'}`}>
+                            {token.symbol.slice(0, 2)}
+                          </div>
+                        )}
+                        <div>
+                          <div className={`font-semibold text-base ${
+                            isDark ? 'text-white' : 'text-gray-900'
+                          }`}>
+                            {token.name}
+                          </div>
+                          <div className={`text-sm ${
+                            isDark ? 'text-slate-400' : 'text-slate-500'
+                          }`}>
+                            {token.symbol}
+                          </div>
+                        </div>
+                      </div>
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onAnalyzeToken(token);
+                        }}
+                        className="bg-gradient-to-r from-[#2F5A8A] to-[#437AF3] text-white px-3 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-200"
+                      >
+                        Analysis
+                      </button>
+                    </div>
+                    
+                    {/* Token Details Grid */}
+                    <div className="grid grid-cols-2 gap-3 text-sm">
+                      <div>
+                        <div className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'} mb-1`}>Price</div>
+                        <div className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                          {token.price}
+                        </div>
+                      </div>
+                      <div>
+                        <div className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'} mb-1`}>24h Change</div>
+                        <div className={`font-medium flex items-center gap-1 ${
+                          token.change.startsWith('+') ? 'text-emerald-400' : 'text-red-400'
+                        }`}>
+                          {token.trending === 'up' ? (
+                            <TrendingUp className="w-3 h-3" />
+                          ) : (
+                            <TrendingDown className="w-3 h-3" />
+                          )}
+                          {token.change}
+                        </div>
+                      </div>
+                      <div>
+                        <div className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'} mb-1`}>Market Cap</div>
+                        <div className={`${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
+                          {token.marketCap}
+                        </div>
+                      </div>
+                      <div>
+                        <div className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'} mb-1`}>Volume</div>
+                        <div className={`${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
+                          {token.volume}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Category and Risk Score */}
+                    <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-200/10">
+                      <div>
+                        {token.category && (
+                          <span className={`inline-flex px-2 py-1 rounded-md text-xs font-medium border ${
+                            token.category === 'DeFi' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
+                            token.category === 'Gaming' ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' :
+                            token.category === 'Infrastructure' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
+                            token.category === 'NFT' ? 'bg-pink-500/10 text-pink-400 border-pink-500/20' :
+                            'bg-gray-500/10 text-gray-400 border-gray-500/20'
+                          }`}>
+                            {token.category}
+                          </span>
+                        )}
+                      </div>
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getRiskBadge(token.riskScore)}`}>
+                        {token.riskScore.toUpperCase()}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className={`px-4 py-12 text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                  {marketFilters.search || marketFilters.category !== 'All' 
+                    ? 'No tokens found matching your criteria.' 
+                    : 'No token data available.'
+                  }
+                </div>
+              )}
+            </div>
+            
+            {/* Desktop Table View */}
+            <div className="hidden sm:block overflow-x-auto">
               <table className="w-full">
                 <thead className={`${
                   isDark ? 'bg-white/5' : 'bg-gray-50'
@@ -650,17 +815,17 @@ export const HomePage: React.FC<HomePageProps> = ({
                     }`}>
                       24h Change
                     </th>
-                    <th className={`px-6 py-4 text-right text-sm font-semibold ${
+                    <th className={`px-6 py-4 text-right text-sm font-semibold hidden lg:table-cell ${
                       isDark ? 'text-slate-300' : 'text-slate-600'
                     }`}>
                       Market Cap
                     </th>
-                    <th className={`px-6 py-4 text-right text-sm font-semibold ${
+                    <th className={`px-6 py-4 text-right text-sm font-semibold hidden xl:table-cell ${
                       isDark ? 'text-slate-300' : 'text-slate-600'
                     }`}>
                       Volume
                     </th>
-                    <th className={`px-6 py-4 text-center text-sm font-semibold ${
+                    <th className={`px-6 py-4 text-center text-sm font-semibold hidden lg:table-cell ${
                       isDark ? 'text-slate-300' : 'text-slate-600'
                     }`}>
                       Category
@@ -753,17 +918,17 @@ export const HomePage: React.FC<HomePageProps> = ({
                             {token.change}
                           </div>
                         </td>
-                        <td className={`px-6 py-4 text-right ${
+                        <td className={`px-6 py-4 text-right hidden lg:table-cell ${
                           isDark ? 'text-slate-300' : 'text-slate-600'
                         }`}>
                           {token.marketCap}
                         </td>
-                        <td className={`px-6 py-4 text-right ${
+                        <td className={`px-6 py-4 text-right hidden xl:table-cell ${
                           isDark ? 'text-slate-300' : 'text-slate-600'
                         }`}>
                           {token.volume}
                         </td>
-                        <td className="px-6 py-4 text-center">
+                        <td className="px-6 py-4 text-center hidden lg:table-cell">
                           {token.category && (
                             <span className={`inline-flex px-2 py-1 rounded-md text-xs font-medium border ${
                               token.category === 'DeFi' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
@@ -787,7 +952,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                               e.stopPropagation();
                               onAnalyzeToken(token);
                             }}
-                            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-200"
+                            className="bg-gradient-to-r from-[#2F5A8A] to-[#437AF3] text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-200"
                           >
                             Analysis
                           </button>
