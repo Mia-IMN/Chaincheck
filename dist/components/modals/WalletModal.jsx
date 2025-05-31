@@ -105,7 +105,10 @@ const WalletModal = ({ isOpen, onClose, isDark, wallet, isConnecting, error, con
                     </div>)}
                 </button>
 
-                <button onClick={connectWithSuiWallet} disabled={isConnecting} className={`w-full flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 ${isDark
+                <button onClick={() => {
+                  console.log("Connecting with Sui Wallet");
+                  connectWithSuiWallet();
+                }} disabled={isConnecting} className={`w-full flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 ${isDark
                 ? 'bg-white/5 border-white/10 hover:bg-white/10 text-white'
                 : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-900 hover:shadow-md'} ${isConnecting ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'}`}>
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 flex items-center justify-center">

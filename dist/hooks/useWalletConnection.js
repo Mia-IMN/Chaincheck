@@ -165,9 +165,11 @@ const useWalletConnection = () => {
     const connectWithSuiWallet = () => __awaiter(void 0, void 0, void 0, function* () {
         setIsConnecting(true);
         setError(null);
+        console.log('Connecting to Sui wallet...');	
         try {
             // Check if Sui wallet is available
             if (!window.suiWallet) {
+                console.log("Window: ", window)
                 throw new Error('Sui wallet not detected. Please install a Sui wallet extension.');
             }
             // Request connection to Sui wallet
