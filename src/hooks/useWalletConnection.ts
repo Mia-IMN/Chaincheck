@@ -14,7 +14,7 @@ import { WalletConnection } from '../types';
 
 // Configuration - you'll need to set these up
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'your_google_client_id';
-const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || 'http://localhost:3000';
+const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || 'https://chaincheck.onrender.com';
 const PROVER_URL = 'https://prover-dev.mystenlabs.com/v1'; // Mysten Labs devnet prover
 const SUI_NETWORK = 'devnet'; // or 'testnet', 'mainnet'
 const FULLNODE_URL = `https://fullnode.${SUI_NETWORK}.sui.io`;
